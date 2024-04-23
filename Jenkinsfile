@@ -33,7 +33,7 @@ pipeline {
             steps {
                 // Assuming you have Kubernetes configurations set up in your Jenkins environment
                 // Deploy to Kubernetes using kubectl
-                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f deployment.yaml -n default'
                 sh 'kubectl apply -f nodeport.yaml'
                 sh 'kubectl rollout restart deployment/deployment'
             }
