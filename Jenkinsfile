@@ -7,7 +7,7 @@ pipeline {
         dockerRegistryUrl = "https://index.docker.io/v1/" // Define the Docker registry URL explicitly
         dateTag = new Date().format("yyyyMMdd-HHmmss")
         //  // Define Kubernetes credentials ID
-        kubernetesCredentialsId = 'KubeConfig'
+        // kubernetesCredentialsId = 'KubeConfig'
     }
     
     stages {
@@ -35,23 +35,23 @@ pipeline {
             steps {
                 // Assuming you have Kubernetes configurations set up in your Jenkins environment
                 // Deploy to Kubernetes using kubectl
-                // sh 'kubectl apply -f deployment.yaml --validate=false'
-                // sh 'kubectl apply -f nodeport.yaml'
-                // sh 'kubectl rollout restart deployment/deployment'
-                script{
-                // Use withCredentials to securely pass Kubernetes credentials
-                    withCredentials([file(credentialsId: kubernetesCredentialsId, variable: 'KUBECONFIG')]) {
-                        // Set KUBECONFIG environment variable to use the provided kubeconfig file
-                        sh 'export KUBECONFIG=$KUBECONFIG'
+                sh 'kubectl apply -f deployment.yaml --validate=false'
+                sh 'kubectl apply -f nodeport.yaml'
+                sh 'kubectl rollout restart deployment/deployment'
+            //     script{
+            //     // Use withCredentials to securely pass Kubernetes credentials
+            //         withCredentials([file(credentialsId: kubernetesCredentialsId, variable: 'KUBECONFIG')]) {
+            //             // Set KUBECONFIG environment variable to use the provided kubeconfig file
+            //             sh 'export KUBECONFIG=$KUBECONFIG'
                         
-                        // Run kubectl commands to apply deployment and nodeport services
-                        sh 'kubectl apply -f deployment.yaml'
-                        sh 'kubectl apply -f nodeport.yaml'
+            //             // Run kubectl commands to apply deployment and nodeport services
+            //             sh 'kubectl apply -f deployment.yaml'
+            //             sh 'kubectl apply -f nodeport.yaml'
                         
-                        // Restart the deployment
-                        sh 'kubectl rollout restart deployment/deployment'
-                    }
-            }
+            //             // Restart the deployment
+            //             sh 'kubectl rollout restart deployment/deployment'
+            //         }
+            // }
         }
     }
     
