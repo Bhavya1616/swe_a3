@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stage('Deploying to Kubernetes Cluster') {
+        stage('Deploying to Kubernetes') {
             steps {
                 // Assuming you have Kubernetes configurations set up in your Jenkins environment
                 // Deploy to Kubernetes using kubectl
