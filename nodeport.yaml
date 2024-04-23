@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: webpage-nodeport
+  name: webpage-nodeport-service-star
   namespace: default
 spec:
   clusterIP: 10.43.17.21
