@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: webpage
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: webpage
+    spec:
+      containers:
+      - name: webpagepod
+        image: bhavya16/my-spring-boot-app-assign:latest
+        ports:
+        - containerPort: 8080
+        
