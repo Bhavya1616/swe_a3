@@ -6,7 +6,7 @@ pipeline {
         registryCredential = 'dockerhub' // Assuming you have credentials configured in Jenkins
         dockerRegistryUrl = "https://index.docker.io/v1/" // Define the Docker registry URL explicitly
         dateTag = new Date().format("yyyyMMdd-HHmmss")
-         // Define Kubernetes credentials ID
+        //  // Define Kubernetes credentials ID
         kubernetesCredentialsId = 'KubeConfig'
     }
     
@@ -38,7 +38,7 @@ pipeline {
                 // sh 'kubectl apply -f deployment.yaml --validate=false'
                 // sh 'kubectl apply -f nodeport.yaml'
                 // sh 'kubectl rollout restart deployment/deployment'
-                
+                script{
                 // Use withCredentials to securely pass Kubernetes credentials
                     withCredentials([file(credentialsId: kubernetesCredentialsId, variable: 'KUBECONFIG')]) {
                         // Set KUBECONFIG environment variable to use the provided kubeconfig file
@@ -50,6 +50,7 @@ pipeline {
                         
                         // Restart the deployment
                         sh 'kubectl rollout restart deployment/deployment'
+                    }
             }
         }
     }
