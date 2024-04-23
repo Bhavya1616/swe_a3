@@ -45,7 +45,10 @@ pipeline {
                         
                         // Run kubectl commands to apply deployment and nodeport services
                         sh 'kubectl apply -f deployment.yaml'
-                        sh 'kubectl apply -f nodeport.yaml'
+                        // sh 'kubectl apply -f nodeport.yaml'
+                        sh 'kubectl get service webpage-nodeport-service-star -n default -o yaml > latest_service.yaml'
+                        sh 'kubectl apply -f latest_service.yaml'
+                        
                         
                         // Restart the deployment
                         sh 'kubectl rollout restart deployment/deployment'
